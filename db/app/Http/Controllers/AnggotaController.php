@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Anggota;
+use App\Models\Desa;
+use App\Models\Kecamatan;
+use Illuminate\Http\Request;
+class AnggotaController extends Controller
+{
+    public function index()
+    {
+        $anggotas = Anggota::all();
+        return view('anggota.index', compact('anggotas'));
+    }
+
+    public function create()
+    {
+        $desas = Desa::all();
+        return view('anggota.create', compact('desas'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:50'
+        ]);
+
+        Anggota::create($request->all());
+
+        return redirect()->route('anggota.index')->with('success', 'anggota berhasil ditambahkan.');
+    }
+
+    public function edit($id)
+    {
+        $anggota = Anggota::findOrFail($id);
+        $desas = Desa::all();
+        $kecamatans = Kecamatan::all();
+        return view('anggota.edit', compact('anggota', 'desas', 'kecamatans'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:50'
+        ]);
+
+        $anggota = Anggota::findOrFail($id);
+        $anggota->update($request->all());
+
+        return redirect()->route('anggota.index')->with('success', 'anggota berhasil diperbarui.');
+    }
+
+    public function destroy($id)
+    {
+        $anggota = Anggota::findOrFail($id);
+        $anggota->delete();
+
+        return redirect()->route('anggota.index')->with('success', 'anggota berhasil dihapus.');
+    }
+}
