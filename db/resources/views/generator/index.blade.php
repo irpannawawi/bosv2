@@ -36,7 +36,7 @@
                     @foreach ($anggotas as $anggota)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ $anggota->nama }}</td>
+                            <td class="text-center">{{ $anggota->nama }} / {{ $anggota->desa?->kecamatan?->nama }}</td>
                             <td class="text-center">{{ $anggota->laporan->count() }}</td>
                             <td class="text-center">
                                 <a href="{{ route('generator.download', $anggota->nrp) }}" class="btn btn-primary"><i class="fa fa-download"></i></a>

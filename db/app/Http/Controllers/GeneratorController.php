@@ -48,6 +48,11 @@ class GeneratorController extends Controller
                         break;
                         dd('gagal');
                     }
+                    if($anggota->desa == null){
+                        break;
+                        dd('gagal');
+                    }
+                    
                     $data = [
                         'nrp' => $anggota->nrp,
                         'tanggal' => $tahun . '-' . $bulan . '-' . $tgl,

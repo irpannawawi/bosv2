@@ -25,8 +25,16 @@ class AnggotaController extends Controller
         $request->validate([
             'nama' => 'required|string|max:50'
         ]);
-
-        Anggota::create($request->all());
+        $kecamatan = Desa::where('kd_desa', $request->kd_desa)->first();
+        Anggota::create([
+            'nrp' => $request->nrp,
+            'username' => $request->username,
+            'password' => $request->password,
+            'nama' => $request->nama,
+            'pangkat' => $request->pangkat,
+            'kd_kec' => $kecamatan->kd_kec,
+            'kd_desa' => $kecamatan->kd_desa,
+        ]);
 
         return redirect()->route('anggota.index')->with('success', 'anggota berhasil ditambahkan.');
     }

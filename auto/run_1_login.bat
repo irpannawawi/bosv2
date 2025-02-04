@@ -1,0 +1,1 @@
+npx playwright codegen --save-storage=auth.json bos.polri.go.id

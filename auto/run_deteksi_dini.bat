@@ -1,0 +1,1 @@
+npx playwright test -g "Deteksi dini" --headed --workers=8

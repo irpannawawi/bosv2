@@ -23,7 +23,7 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td class="text-center">{{ $anggota->nama }}</td>
                             <td>{{ $anggota->pangkat.'/'.$anggota->nrp }}</td>
-                            <td>{{ $anggota->desa->kecamatan->nama.'/'.$anggota->desa->nama }}</td>
+                            <td>{{ $anggota->desa?->kecamatan?->nama.'/'.$anggota->desa?->nama }}</td>
                             <td>{{ $anggota->username.'/'.$anggota->password }}</td>
                             <td class="text-end">
                                 <a href="{{ route('anggota.edit', $anggota->id) }}" class="btn btn-primary">Edit</a>

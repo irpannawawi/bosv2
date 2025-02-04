@@ -1,0 +1,1 @@
+npx playwright test -g "DDS" --workers=12

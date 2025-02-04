@@ -81,11 +81,31 @@ const users = {
     'desa': 'Sidamulya',
     'nrp': '85031549',
     'password': '09031985'
+  },
+
+  // sukadana 
+  'sukadanaEel': {
+    'kecamatan': 'Sukadana',
+    'desa': 'Salakaria',
+    'nrp': '92110756',
+    'password': '92110756'
+  },
+  'sukadanaSugandi': {
+    'kecamatan': 'Sukadana',
+    'desa': 'Sukadana',
+    'nrp': '93121076',
+    'password': '93121076'
+  },
+  'sukadanaErik': {
+    'kecamatan': 'Sukadana',
+    'desa': 'Bunter',
+    'nrp': '88030416',
+    'password': '88030416'
   }
+
 }
 
-let user = 'rajadesaDodi';
-
+let user = 'panjaluAndi';
 
 //  do not change below
 function generateString(length) {
@@ -101,7 +121,7 @@ function generateString(length) {
 let kecamatan = users[user]['kecamatan'];
 let desa = users[user]['desa'];
 
-const workSheetsFromFile = xlsx.parse('C:/laragon/www/bosv2/list/' + kecamatan.toLowerCase() + '/list_' + desa.toLowerCase() + '.xlsx');
+const workSheetsFromFile = xlsx.parse('C:/laragon/www/bosv2/auto/list/' + kecamatan.toLowerCase() + '/list_' + desa.toLowerCase() + '.xlsx');
 
 test.describe('DDS', () => {
   workSheetsFromFile[0].data.forEach((value, index) => {
@@ -174,22 +194,20 @@ test.describe('DDS', () => {
       try {
         // alert
         await expect(page.getByRole('button', { name: 'OK' })).toBeVisible({
-          timeout: 15000
+          timeout: 8000
         });
       } catch (error) {
-        console.error(`error on screenshot ${index}`);
-        console.error(error);
+        console.log('alert not found');
       }
 
-      await page.screenshot({ path: `C:/laragon/www/bosv2/screenshots/${index}.png`, });
 
       await page.close();
     });
   })
 })
 
-test.describe('Deteksi dini', async () => {
-  workSheetsFromFile[0].data.slice(2+8, 7+8).forEach((value, index) => {
+test.describe('Deteksi dini', () => {
+  workSheetsFromFile[0].data.slice(20,31).forEach((value, index) => {
     if (index == 0) {
       return;
     }
@@ -267,14 +285,14 @@ test.describe('Deteksi dini', async () => {
       } catch (error) {
         console.log('alert not found');
       }
-      await page.screenshot({ path: `C:/laragon/www/bosv2/screenshots/deteksi_dini_${index}.png`, });
+      await page.screenshot({ path: `C:/laragon/www/bosv2/auto/screenshots/deteksi_dini_${index}.png`, });
   
       await page.close();
     });
   })
 });
 
-test.describe('PS2', async () => {
+test.describe('PS2', () => {
   workSheetsFromFile[0].data.slice(2, 7).forEach((value, index) => {
     if (index == 0) {
       return;
@@ -355,47 +373,47 @@ test.describe('PS2', async () => {
       } catch (error) {
         console.log(error);
       }
-      await page.screenshot({ path: `C:/laragon/www/bosv2/screenshots/ps2_${index}.png`, });
+      await page.screenshot({ path: `C:/laragon/www/bosv2/auto/screenshots/ps2_${index}.png`, });
   
       await page.close();
     });
   })
 });
 
-test.describe('delete', async () => {
-  workSheetsFromFile[0].data.slice(0, 45).forEach((value, index) => {
-    if (index == 0) {
-      return;
-    }
+// test.describe('delete', () => {
+//   workSheetsFromFile[0].data.slice(0, 45).forEach((value, index) => {
+//     if (index == 0) {
+//       return;
+//     }
 
-    test(`do delete ${index}`, async ({ browser }) => {
-      const context = await browser.newContext({
-        storageState: './auth.json'
-      });
+//     test(`do delete ${index}`, async ({ browser }) => {
+//       const context = await browser.newContext({
+//         storageState: './auth.json'
+//       });
 
-      const page = await context.newPage();
-      await page.goto('https://bos.polri.go.id/laporan/dds-warga');
-      await page.getByLabel('Tanggal Kunjungan: activate').click();
-      await page.getByLabel('Tanggal Kunjungan: activate').click();
+//       const page = await context.newPage();
+//       await page.goto('https://bos.polri.go.id/laporan/dds-warga');
+//       await page.getByLabel('Tanggal Kunjungan: activate').click();
+//       await page.getByLabel('Tanggal Kunjungan: activate').click();
 
-      await page.getByRole('row').locator('a').nth(1).click();
-      await expect(page.getByRole('button', { name: 'Hapus' })).toBeVisible();
-      await page.getByRole('button', { name: 'Hapus' }).click();
-      await expect(page.getByRole('heading', { name: 'Operasi Sukses' })).toBeVisible();   
+//       await page.getByRole('row').locator('a').nth(1).click();
+//       await expect(page.getByRole('button', { name: 'Hapus' })).toBeVisible();
+//       await page.getByRole('button', { name: 'Hapus' }).click();
+//       await expect(page.getByRole('heading', { name: 'Operasi Sukses' })).toBeVisible();   
   
-      await page.close();
-    });
-  })
-});
+//       await page.close();
+//     });
+//   })
+// });
 
-test.describe('check', async () => {
+// test.describe('check', async () => {
  
-    test(`do check`, async ({ browser }) => {
-      const context = await browser.newContext({
-        storageState: './auth.json'
-      });
+//     test(`do check`, async ({ browser }) => {
+//       const context = await browser.newContext({
+//         storageState: './auth.json'
+//       });
 
-      const page = await context.newPage();
-      await page.goto('https://bos.polri.go.id/laporan/dds-warga');
-    });
-});
+//       const page = await context.newPage();
+//       await page.goto('https://bos.polri.go.id/laporan/dds-warga');
+//     });
+// });
