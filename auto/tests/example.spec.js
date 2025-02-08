@@ -105,7 +105,7 @@ const users = {
 
 }
 
-let user = 'panjaluAndi';
+let user = 'sukadanaErik';
 
 //  do not change below
 function generateString(length) {
@@ -121,7 +121,7 @@ function generateString(length) {
 let kecamatan = users[user]['kecamatan'];
 let desa = users[user]['desa'];
 
-const workSheetsFromFile = xlsx.parse('C:/laragon/www/bosv2/auto/list/' + kecamatan.toLowerCase() + '/list_' + desa.toLowerCase() + '.xlsx');
+const workSheetsFromFile = xlsx.parse('./auto/list/' + kecamatan.toLowerCase() + '/list_' + desa.toLowerCase() + '.xlsx');
 
 test.describe('DDS', () => {
   workSheetsFromFile[0].data.forEach((value, index) => {
